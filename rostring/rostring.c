@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <unistd.h>
 
 void	write_word(char *start, char *end)
@@ -9,46 +10,47 @@ void	write_word(char *start, char *end)
 	}
 }
 
-int main(int ac, char **av)
+void	ft_rostring(char *str)
 {
-	int i;
-	char *str;
-	char *first_word_start;
-	char *first_word_end;
+	int		i;
+	char	*start_word;
+	char	*end_word;
 
-	if (ac > 1)
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	start_word = &str[i];
+	while (str[i] && !(str[i] == ' ' || str[i] == '\t'))
+		i++;
+	end_word = &str[i];
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	if (str[i])
 	{
-		i = 0;
-		str = av[1];
-		while (str[i] == ' ' || str[i] == '\t')
-			i++;
-		first_word_start = &str[i];
-		while (str[i] && str[i] != ' ' && str[i] != '\t')
-			i++;
-		first_word_end = &str[i];
-		while (str[i] == ' ' || str[i] == '\t')
-			i++;
-		if (str[i])
+		while (str[i])
 		{
-			while (str[i])
+			if (str[i] == ' ' || str[i] == '\t')
 			{
-				if (str[i] == ' ' || str[i] == '\t')
-				{
-					while (str[i] == ' ' || str[i] == '\t')
-						i++;
-					if (str[i])
-						write (1, " ", 1);
-				}
-				else
-				{
-					write (1, &str[i], 1);
+				while (str[i] == ' ' || str[i] == '\t')
 					i++;
-				}
+				if (str[i])
+					write(1, " ", 1);
 			}
-			write (1, " ", 1);
+			else
+			{
+				write(1, &str[i], 1);
+				i++;
+			}
 		}
-		write_word(first_word_start, first_word_end);
+		write(1, " ", 1);
 	}
+	write_word(start_word, end_word);
+}
+
+int	main(int ac, char **av)
+{
+	if (ac > 1)
+		ft_rostring(av[1]);
 	write(1, "\n", 1);
 	return (0);
 }
