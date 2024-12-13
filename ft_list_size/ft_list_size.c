@@ -24,7 +24,7 @@ int	ft_list_size(t_list *begin_list)
 	}
 	return (size);
 }
-
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include "ft_list.h"
@@ -54,7 +54,7 @@ void	free_list(t_list *list)
 		list = temp;
 	}
 }
-/*
+
 int	main(void)
 {
 	t_list	*list;
